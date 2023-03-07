@@ -1,0 +1,10 @@
+laptop
+televizor
+monitor
+masa
+mancare
+bere
+perete
+caramida
+tastatura
+mouse
