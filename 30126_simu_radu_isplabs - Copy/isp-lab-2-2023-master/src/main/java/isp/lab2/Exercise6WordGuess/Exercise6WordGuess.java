@@ -2,17 +2,14 @@ package isp.lab2.Exercise6WordGuess;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.util.Arrays.fill;
+
 public class Exercise6WordGuess {
 
-    /**
-     * This method will return the number of occurrences of a character in a word
-     * @param c
-     * @param word
-     * @return
-     */
     public static String selectRandomWord() throws FileNotFoundException {
         Random random = new Random();
         int word_number = random.nextInt(10);
@@ -38,19 +35,27 @@ public class Exercise6WordGuess {
         return nr;
     }
 
-    public static String readFromConsoleLetter() {
+    public static char readFromConsoleLetter() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter guess: ");
-        return scanner.nextLine();
+        System.out.print("Enter guess: ");
+        String guess = scanner.nextLine();
+        char characterForGuessing = guess.toCharArray()[0];
+        return characterForGuessing;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String game_word = selectRandomWord();
-        System.out.println(game_word);
-        int remaining_letters = game_word.length(), numberOfTries = 0;
+        char[] game_word = selectRandomWord().toCharArray();
+        int remaining_letters = game_word.length, numberOfTries = 0;
+        char[] guessed_word = new char[remaining_letters];
+        Arrays.fill(guessed_word, '_'); //Marcam literele neghicite
         while(remaining_letters > 0) {
-            System.out.println(countOccurence('a', game_word.toCharArray()));
+            char guessed_letter = readFromConsoleLetter();
+            remaining_letters = remaining_letters - countOccurence(guessed_letter, game_word);
+            for(int i=0;i<game_word.length;i++)
+                if(game_word[i] == guessed_letter) guessed_word[i] = guessed_letter;
+            System.out.printf("Incercarea %d: %s\n", ++numberOfTries, String.valueOf(guessed_word));
         }
+        System.out.printf("Cuvantul a fost: %s\nA fost ghicit din %d incercari.", String.valueOf(game_word), numberOfTries);
     }
 
 }
