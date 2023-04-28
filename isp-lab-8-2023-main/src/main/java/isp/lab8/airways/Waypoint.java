@@ -1,6 +1,5 @@
 package isp.lab8.airways;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,15 @@ public class Waypoint {
 
     public String getIndex() {
         return index;
+    }
+
+    @Override
+    public String toString() {
+        return '\"' + index + "\" (" +
+                name + "): " +
+                latitude + "° N, " +
+                longitude + "° E, " +
+                altitude + " meters altitude";
     }
 
     public double getLatitude() {

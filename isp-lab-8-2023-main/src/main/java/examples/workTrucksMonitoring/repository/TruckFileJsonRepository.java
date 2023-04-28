@@ -31,7 +31,6 @@ public class TruckFileJsonRepository implements ITruckRepository {
         FilesAndFoldersUtil.createFolder(workingFolder);
         this.workingFolder = workingFolder;
     }
-
     @Override
     public void save(Truck t) {
         try {
